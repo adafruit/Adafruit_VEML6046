@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pdftotext:*)",
+      "Bash(arduino-cli compile:*)",
+      "Bash(arduino-cli board:*)",
+      "Bash(arduino-cli upload:*)",
+      "Bash(arduino-cli lib examples:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(\"C:\\Users\\ladyada\\AppData\\Roaming\\Python\\Python312\\Scripts\\clang-format.exe\" -i Adafruit_VEML6046.h Adafruit_VEML6046.cpp examples/test_veml6046/test_veml6046.ino)",
+      "Bash(git push:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
