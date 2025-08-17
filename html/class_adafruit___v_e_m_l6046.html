@@ -153,6 +153,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a64d3beb16307f810056f3f3b9bc3d55e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___v_e_m_l6046.html#a64d3beb16307f810056f3f3b9bc3d55e">getData</a> (uint16_t *r, uint16_t *g, uint16_t *b, uint16_t *ir)</td></tr>
 <tr class="memdesc:a64d3beb16307f810056f3f3b9bc3d55e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads all RGBIR channel data in one operation.  <a href="#a64d3beb16307f810056f3f3b9bc3d55e">More...</a><br /></td></tr>
 <tr class="separator:a64d3beb16307f810056f3f3b9bc3d55e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9d64c3dc005db9808946acb26303b0b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___v_e_m_l6046.html#ae9d64c3dc005db9808946acb26303b0b">calculateLux</a> (uint16_t green_count)</td></tr>
+<tr class="memdesc:ae9d64c3dc005db9808946acb26303b0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates lux value from green channel count.  <a href="#ae9d64c3dc005db9808946acb26303b0b">More...</a><br /></td></tr>
+<tr class="separator:ae9d64c3dc005db9808946acb26303b0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Main VEML6046 class for RGBIR color sensor. </p>
@@ -760,6 +763,33 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if successful, false if I2C read failed </dd></dl>
+
+</div>
+</div>
+<a id="ae9d64c3dc005db9808946acb26303b0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9d64c3dc005db9808946acb26303b0b">&#9670;&nbsp;</a></span>calculateLux()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Adafruit_VEML6046::calculateLux </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>green_count</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculates lux value from green channel count. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">green_count</td><td>Raw green channel reading </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Calculated lux value </dd></dl>
 
 </div>
 </div>
