@@ -178,7 +178,7 @@ void setup() {
   } else {
     Serial.println(F("Failed to set green low threshold"));
   }
-  
+
   if (veml.setGreenThresholdHigh(10000)) {
     Serial.println(F("Green high threshold set successfully"));
   } else {
@@ -192,20 +192,38 @@ void setup() {
   Serial.print(low_thresh);
   Serial.print(F(", High: "));
   Serial.println(high_thresh);
-  
+
   // Calculate optimal delay based on current integration time + 5ms buffer
   current_it = veml.getIntegrationTime();
   sample_delay_ms = 5; // Base 5ms buffer
   switch (current_it) {
-    case VEML6046_IT_3_125MS: sample_delay_ms += 4; break;    // 3.125ms rounded up
-    case VEML6046_IT_6_25MS: sample_delay_ms += 7; break;     // 6.25ms rounded up
-    case VEML6046_IT_12_5MS: sample_delay_ms += 13; break;    // 12.5ms rounded up
-    case VEML6046_IT_25MS: sample_delay_ms += 25; break;
-    case VEML6046_IT_50MS: sample_delay_ms += 50; break;
-    case VEML6046_IT_100MS: sample_delay_ms += 100; break;
-    case VEML6046_IT_200MS: sample_delay_ms += 200; break;
-    case VEML6046_IT_400MS: sample_delay_ms += 400; break;
-    default: sample_delay_ms += 25; break; // Default fallback
+    case VEML6046_IT_3_125MS:
+      sample_delay_ms += 4;
+      break; // 3.125ms rounded up
+    case VEML6046_IT_6_25MS:
+      sample_delay_ms += 7;
+      break; // 6.25ms rounded up
+    case VEML6046_IT_12_5MS:
+      sample_delay_ms += 13;
+      break; // 12.5ms rounded up
+    case VEML6046_IT_25MS:
+      sample_delay_ms += 25;
+      break;
+    case VEML6046_IT_50MS:
+      sample_delay_ms += 50;
+      break;
+    case VEML6046_IT_100MS:
+      sample_delay_ms += 100;
+      break;
+    case VEML6046_IT_200MS:
+      sample_delay_ms += 200;
+      break;
+    case VEML6046_IT_400MS:
+      sample_delay_ms += 400;
+      break;
+    default:
+      sample_delay_ms += 25;
+      break; // Default fallback
   }
   Serial.print(F("Using sample delay: "));
   Serial.print(sample_delay_ms);
