@@ -1,4 +1,4 @@
-# Adafruit VEML6046 Library [![Build Status](https://github.com/adafruit/Adafruit_VEML6046/workflows/Arduino%20Library%20CI/badge.svg)](https://github.com/adafruit/Adafruit_VEML6046/actions) [![Documentation](https://github.com/adafruit/Adafruit_VEML6046/workflows/GitHub%20Pages/badge.svg)](http://adafruit.github.io/Adafruit_VEML6046)
+# Adafruit VEML6046 Library [![Build Status](https://github.com/adafruit/Adafruit_VEML6046/workflows/Arduino%20Library%20CI/badge.svg)](https://github.com/adafruit/Adafruit_VEML6046/actions) [![Documentation](https://github.com/adafruit/Adafruit_VEML6046/actions/workflows/githubci.yml/badge.svg)](http://adafruit.github.io/Adafruit_VEML6046)
 
 Arduino library for the VEML6046 high accuracy RGBIR color sensor.
 
