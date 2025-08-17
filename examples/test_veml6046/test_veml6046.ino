@@ -8,6 +8,7 @@
 #include "Adafruit_VEML6046.h"
 
 Adafruit_VEML6046 veml = Adafruit_VEML6046();
+uint16_t sample_delay_ms = 30; // Will be calculated in setup
 
 void setup() {
   Serial.begin(115200);
@@ -111,12 +112,111 @@ void setup() {
   bool green_int_enabled = veml.getGreenIntEnabled();
   Serial.print(F("Green interrupt enabled: "));
   Serial.println(green_int_enabled ? F("Yes") : F("No"));
+
+  // Test RGB gain setter/getter
+  Serial.println(F("Setting RGB gain to 1x"));
+  if (veml.setRGBGain(VEML6046_GAIN_1X)) {
+    Serial.println(F("RGB gain set successfully"));
+  } else {
+    Serial.println(F("Failed to set RGB gain"));
+  }
+
+  // Read back and display current RGB gain
+  veml6046_gain_t current_gain = veml.getRGBGain();
+  Serial.print(F("Current RGB gain: "));
+  switch (current_gain) {
+    case VEML6046_GAIN_1X:
+      Serial.println(F("1x"));
+      break;
+    case VEML6046_GAIN_2X:
+      Serial.println(F("2x"));
+      break;
+    case VEML6046_GAIN_0_66X:
+      Serial.println(F("0.66x"));
+      break;
+    case VEML6046_GAIN_0_5X:
+      Serial.println(F("0.5x"));
+      break;
+    default:
+      Serial.println(F("Unknown"));
+      break;
+  }
+
+  // Test interrupt persistence setter/getter
+  Serial.println(F("Setting interrupt persistence to 1"));
+  if (veml.setIntPersistence(VEML6046_PERS_1)) {
+    Serial.println(F("Interrupt persistence set successfully"));
+  } else {
+    Serial.println(F("Failed to set interrupt persistence"));
+  }
+
+  // Read back and display current persistence
+  veml6046_persistence_t current_pers = veml.getIntPersistence();
+  Serial.print(F("Current interrupt persistence: "));
+  switch (current_pers) {
+    case VEML6046_PERS_1:
+      Serial.println(F("1 time"));
+      break;
+    case VEML6046_PERS_2:
+      Serial.println(F("2 times"));
+      break;
+    case VEML6046_PERS_4:
+      Serial.println(F("4 times"));
+      break;
+    case VEML6046_PERS_8:
+      Serial.println(F("8 times"));
+      break;
+    default:
+      Serial.println(F("Unknown"));
+      break;
+  }
+
+  // Test green threshold setter/getter
+  Serial.println(F("Setting green thresholds: low=1000, high=10000"));
+  if (veml.setGreenThresholdLow(1000)) {
+    Serial.println(F("Green low threshold set successfully"));
+  } else {
+    Serial.println(F("Failed to set green low threshold"));
+  }
+  
+  if (veml.setGreenThresholdHigh(10000)) {
+    Serial.println(F("Green high threshold set successfully"));
+  } else {
+    Serial.println(F("Failed to set green high threshold"));
+  }
+
+  // Read back and display current thresholds
+  uint16_t low_thresh = veml.getGreenThresholdLow();
+  uint16_t high_thresh = veml.getGreenThresholdHigh();
+  Serial.print(F("Current green thresholds - Low: "));
+  Serial.print(low_thresh);
+  Serial.print(F(", High: "));
+  Serial.println(high_thresh);
+  
+  // Calculate optimal delay based on current integration time + 5ms buffer
+  current_it = veml.getIntegrationTime();
+  sample_delay_ms = 5; // Base 5ms buffer
+  switch (current_it) {
+    case VEML6046_IT_3_125MS: sample_delay_ms += 4; break;    // 3.125ms rounded up
+    case VEML6046_IT_6_25MS: sample_delay_ms += 7; break;     // 6.25ms rounded up
+    case VEML6046_IT_12_5MS: sample_delay_ms += 13; break;    // 12.5ms rounded up
+    case VEML6046_IT_25MS: sample_delay_ms += 25; break;
+    case VEML6046_IT_50MS: sample_delay_ms += 50; break;
+    case VEML6046_IT_100MS: sample_delay_ms += 100; break;
+    case VEML6046_IT_200MS: sample_delay_ms += 200; break;
+    case VEML6046_IT_400MS: sample_delay_ms += 400; break;
+    default: sample_delay_ms += 25; break; // Default fallback
+  }
+  Serial.print(F("Using sample delay: "));
+  Serial.print(sample_delay_ms);
+  Serial.println(F("ms"));
 }
 
 void loop() {
   // Read RGBIR data in continuous mode
   uint16_t r, g, b, ir;
   if (veml.getData(&r, &g, &b, &ir)) {
+    float lux = veml.calculateLux(g);
     Serial.print(F("R: "));
     Serial.print(r);
     Serial.print(F(" G: "));
@@ -124,10 +224,17 @@ void loop() {
     Serial.print(F(" B: "));
     Serial.print(b);
     Serial.print(F(" IR: "));
-    Serial.println(ir);
+    Serial.print(ir);
+    Serial.print(F(" Lux: "));
+    Serial.println(lux, 2);
   } else {
     Serial.println(F("Failed to read data"));
   }
 
-  delay(1000);
+  // If in forced mode, trigger next reading
+  if (veml.getRGBModeForced()) {
+    veml.RGBTrigger();
+  }
+
+  delay(sample_delay_ms);
 }

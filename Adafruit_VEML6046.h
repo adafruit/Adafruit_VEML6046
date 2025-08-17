@@ -125,6 +125,8 @@ class Adafruit_VEML6046 {
 
   bool getData(uint16_t* r, uint16_t* g, uint16_t* b, uint16_t* ir);
 
+  float calculateLux(uint16_t green_count);
+
  private:
   Adafruit_I2CDevice* i2c_dev; ///< Pointer to I2C bus interface
 };

@@ -399,3 +399,159 @@ bool Adafruit_VEML6046::getData(uint16_t* r, uint16_t* g, uint16_t* b,
 
   return true;
 }
+
+/*!
+ *  @brief  Calculates lux value from green channel count
+ *  @param  green_count Raw green channel reading
+ *  @return Calculated lux value
+ */
+float Adafruit_VEML6046::calculateLux(uint16_t green_count) {
+  // Get current settings to determine resolution factor
+  veml6046_integration_time_t it = getIntegrationTime();
+  veml6046_gain_t gain = getRGBGain();
+  bool half_pd = getPhotoDiodeHalfSize();
+  
+  float resolution = 0.0;
+  
+  // Resolution table from datasheet (lx/cnt)
+  // TABLE 13 - 2/2 PD USED, TABLE 14 - 1/2 PD USED
+  if (half_pd) {
+    // 1/2 PD used - TABLE 14
+    switch (it) {
+      case VEML6046_IT_400MS:
+        switch (gain) {
+          case VEML6046_GAIN_2X: resolution = 0.0105; break;
+          case VEML6046_GAIN_1X: resolution = 0.0210; break;
+          case VEML6046_GAIN_0_66X: resolution = 0.0318; break;
+          case VEML6046_GAIN_0_5X: resolution = 0.0420; break;
+        }
+        break;
+      case VEML6046_IT_200MS:
+        switch (gain) {
+          case VEML6046_GAIN_2X: resolution = 0.0210; break;
+          case VEML6046_GAIN_1X: resolution = 0.0420; break;
+          case VEML6046_GAIN_0_66X: resolution = 0.0636; break;
+          case VEML6046_GAIN_0_5X: resolution = 0.0840; break;
+        }
+        break;
+      case VEML6046_IT_100MS:
+        switch (gain) {
+          case VEML6046_GAIN_2X: resolution = 0.0420; break;
+          case VEML6046_GAIN_1X: resolution = 0.0840; break;
+          case VEML6046_GAIN_0_66X: resolution = 0.1273; break;
+          case VEML6046_GAIN_0_5X: resolution = 0.1680; break;
+        }
+        break;
+      case VEML6046_IT_50MS:
+        switch (gain) {
+          case VEML6046_GAIN_2X: resolution = 0.0840; break;
+          case VEML6046_GAIN_1X: resolution = 0.1680; break;
+          case VEML6046_GAIN_0_66X: resolution = 0.2545; break;
+          case VEML6046_GAIN_0_5X: resolution = 0.3360; break;
+        }
+        break;
+      case VEML6046_IT_25MS:
+        switch (gain) {
+          case VEML6046_GAIN_2X: resolution = 0.1680; break;
+          case VEML6046_GAIN_1X: resolution = 0.3360; break;
+          case VEML6046_GAIN_0_66X: resolution = 0.5091; break;
+          case VEML6046_GAIN_0_5X: resolution = 0.6720; break;
+        }
+        break;
+      case VEML6046_IT_12_5MS:
+        switch (gain) {
+          case VEML6046_GAIN_2X: resolution = 0.3360; break;
+          case VEML6046_GAIN_1X: resolution = 0.6720; break;
+          case VEML6046_GAIN_0_66X: resolution = 1.0182; break;
+          case VEML6046_GAIN_0_5X: resolution = 1.3440; break;
+        }
+        break;
+      case VEML6046_IT_6_25MS:
+        switch (gain) {
+          case VEML6046_GAIN_2X: resolution = 0.6720; break;
+          case VEML6046_GAIN_1X: resolution = 1.3440; break;
+          case VEML6046_GAIN_0_66X: resolution = 2.0364; break;
+          case VEML6046_GAIN_0_5X: resolution = 2.6880; break;
+        }
+        break;
+      case VEML6046_IT_3_125MS:
+        switch (gain) {
+          case VEML6046_GAIN_2X: resolution = 1.3440; break;
+          case VEML6046_GAIN_1X: resolution = 2.6880; break;
+          case VEML6046_GAIN_0_66X: resolution = 4.0727; break;
+          case VEML6046_GAIN_0_5X: resolution = 5.3760; break;
+        }
+        break;
+    }
+  } else {
+    // 2/2 PD used - TABLE 13  
+    switch (it) {
+      case VEML6046_IT_400MS:
+        switch (gain) {
+          case VEML6046_GAIN_2X: resolution = 0.0053; break;
+          case VEML6046_GAIN_1X: resolution = 0.0105; break;
+          case VEML6046_GAIN_0_66X: resolution = 0.0159; break;
+          case VEML6046_GAIN_0_5X: resolution = 0.0210; break;
+        }
+        break;
+      case VEML6046_IT_200MS:
+        switch (gain) {
+          case VEML6046_GAIN_2X: resolution = 0.0105; break;
+          case VEML6046_GAIN_1X: resolution = 0.0210; break;
+          case VEML6046_GAIN_0_66X: resolution = 0.0318; break;
+          case VEML6046_GAIN_0_5X: resolution = 0.0420; break;
+        }
+        break;
+      case VEML6046_IT_100MS:
+        switch (gain) {
+          case VEML6046_GAIN_2X: resolution = 0.0210; break;
+          case VEML6046_GAIN_1X: resolution = 0.0420; break;
+          case VEML6046_GAIN_0_66X: resolution = 0.0636; break;
+          case VEML6046_GAIN_0_5X: resolution = 0.0840; break;
+        }
+        break;
+      case VEML6046_IT_50MS:
+        switch (gain) {
+          case VEML6046_GAIN_2X: resolution = 0.0420; break;
+          case VEML6046_GAIN_1X: resolution = 0.0840; break;
+          case VEML6046_GAIN_0_66X: resolution = 0.1273; break;
+          case VEML6046_GAIN_0_5X: resolution = 0.1680; break;
+        }
+        break;
+      case VEML6046_IT_25MS:
+        switch (gain) {
+          case VEML6046_GAIN_2X: resolution = 0.0840; break;
+          case VEML6046_GAIN_1X: resolution = 0.1680; break;
+          case VEML6046_GAIN_0_66X: resolution = 0.2545; break;
+          case VEML6046_GAIN_0_5X: resolution = 0.3360; break;
+        }
+        break;
+      case VEML6046_IT_12_5MS:
+        switch (gain) {
+          case VEML6046_GAIN_2X: resolution = 0.1680; break;
+          case VEML6046_GAIN_1X: resolution = 0.3360; break;
+          case VEML6046_GAIN_0_66X: resolution = 0.5091; break;
+          case VEML6046_GAIN_0_5X: resolution = 0.6720; break;
+        }
+        break;
+      case VEML6046_IT_6_25MS:
+        switch (gain) {
+          case VEML6046_GAIN_2X: resolution = 0.3360; break;
+          case VEML6046_GAIN_1X: resolution = 0.6720; break;
+          case VEML6046_GAIN_0_66X: resolution = 1.0182; break;
+          case VEML6046_GAIN_0_5X: resolution = 1.3440; break;
+        }
+        break;
+      case VEML6046_IT_3_125MS:
+        switch (gain) {
+          case VEML6046_GAIN_2X: resolution = 0.6720; break;
+          case VEML6046_GAIN_1X: resolution = 1.3440; break;
+          case VEML6046_GAIN_0_66X: resolution = 2.0364; break;
+          case VEML6046_GAIN_0_5X: resolution = 2.6880; break;
+        }
+        break;
+    }
+  }
+  
+  return green_count * resolution;
+}
