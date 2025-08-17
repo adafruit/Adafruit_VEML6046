@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['veml6046_5fdefault_5faddr',['VEML6046_DEFAULT_ADDR',['../_adafruit___v_e_m_l6046_8h.html#a0c75f9282c3374d1cc94a0bd0a9bc3cf',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5freg_5fb_5fdata_5fh',['VEML6046_REG_B_DATA_H',['../_adafruit___v_e_m_l6046_8h.html#a646ca9d8b6ab5db286e1531438028e93',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5freg_5fb_5fdata_5fl',['VEML6046_REG_B_DATA_L',['../_adafruit___v_e_m_l6046_8h.html#abbf382491c5caff42a76cd9ab3716ed1',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5freg_5fg_5fdata_5fh',['VEML6046_REG_G_DATA_H',['../_adafruit___v_e_m_l6046_8h.html#a57890ee0060d884fc82b2afb06e1931d',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5freg_5fg_5fdata_5fl',['VEML6046_REG_G_DATA_L',['../_adafruit___v_e_m_l6046_8h.html#a86658e3b88ab5872fd05a56de0daee62',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5freg_5fg_5fthdh_5fh',['VEML6046_REG_G_THDH_H',['../_adafruit___v_e_m_l6046_8h.html#a4a7bf42ac510e3560fbd2617db57dee9',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5freg_5fg_5fthdh_5fl',['VEML6046_REG_G_THDH_L',['../_adafruit___v_e_m_l6046_8h.html#acdff473ade0767739815c18f559f2587',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5freg_5fg_5fthdl_5fh',['VEML6046_REG_G_THDL_H',['../_adafruit___v_e_m_l6046_8h.html#a993504ad71c8d1b4e0d7709b05232c0c',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5freg_5fg_5fthdl_5fl',['VEML6046_REG_G_THDL_L',['../_adafruit___v_e_m_l6046_8h.html#a82d634dd50cea9c93d46536f0f6a8e0e',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5freg_5fid_5fh',['VEML6046_REG_ID_H',['../_adafruit___v_e_m_l6046_8h.html#acbb2ead1b1f90c2bacc4e3e0d40b661d',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5freg_5fid_5fl',['VEML6046_REG_ID_L',['../_adafruit___v_e_m_l6046_8h.html#a13f0e7021da70ebb8fadc69c9b24cefd',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5freg_5fint_5fflag',['VEML6046_REG_INT_FLAG',['../_adafruit___v_e_m_l6046_8h.html#af7f0152add709d926e99ae083f9549b4',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5freg_5fir_5fdata_5fh',['VEML6046_REG_IR_DATA_H',['../_adafruit___v_e_m_l6046_8h.html#ace875e6c054dc7ca4b43f4dc20fa2fb0',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5freg_5fir_5fdata_5fl',['VEML6046_REG_IR_DATA_L',['../_adafruit___v_e_m_l6046_8h.html#acbe94e4e0e1796df84d46d0b3f457cfa',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5freg_5fr_5fdata_5fh',['VEML6046_REG_R_DATA_H',['../_adafruit___v_e_m_l6046_8h.html#ab7be1d0e929592c6eed5f5223e26b818',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5freg_5fr_5fdata_5fl',['VEML6046_REG_R_DATA_L',['../_adafruit___v_e_m_l6046_8h.html#a02bde294af7eaa094413883bc81f8255',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5freg_5frgb_5fconf_5f0',['VEML6046_REG_RGB_CONF_0',['../_adafruit___v_e_m_l6046_8h.html#abeb8926be4d0bef1c5ce5fd9683c219f',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5freg_5frgb_5fconf_5f1',['VEML6046_REG_RGB_CONF_1',['../_adafruit___v_e_m_l6046_8h.html#a886beebf864ea15e4bf20cf881aeb94d',1,'Adafruit_VEML6046.h']]]
+];

@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['veml6046_5fgain_5f0_5f5x',['VEML6046_GAIN_0_5X',['../_adafruit___v_e_m_l6046_8h.html#a4f705a3de1102f4954ac0129dc1705d3ad327477468df6fa946f8d601255db0b1',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5fgain_5f0_5f66x',['VEML6046_GAIN_0_66X',['../_adafruit___v_e_m_l6046_8h.html#a4f705a3de1102f4954ac0129dc1705d3a013c4bd0b298785daee2c5a3fe4f5235',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5fgain_5f1x',['VEML6046_GAIN_1X',['../_adafruit___v_e_m_l6046_8h.html#a4f705a3de1102f4954ac0129dc1705d3a1959aa40aecd466ca23722f232c68ece',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5fgain_5f2x',['VEML6046_GAIN_2X',['../_adafruit___v_e_m_l6046_8h.html#a4f705a3de1102f4954ac0129dc1705d3aaa3fb6bc5a737214a290b829fedfd134',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5fit_5f100ms',['VEML6046_IT_100MS',['../_adafruit___v_e_m_l6046_8h.html#a45f88541acc3c20740be1bf3fd70fbaeaf49105f62751e80d27bc343ca2649c51',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5fit_5f12_5f5ms',['VEML6046_IT_12_5MS',['../_adafruit___v_e_m_l6046_8h.html#a45f88541acc3c20740be1bf3fd70fbaea2a741c37f996e1007d1cdae8df9c5d0c',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5fit_5f200ms',['VEML6046_IT_200MS',['../_adafruit___v_e_m_l6046_8h.html#a45f88541acc3c20740be1bf3fd70fbaea01581bb50a934e96c961e4d66ace0195',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5fit_5f25ms',['VEML6046_IT_25MS',['../_adafruit___v_e_m_l6046_8h.html#a45f88541acc3c20740be1bf3fd70fbaea6c8d72131bd9c169d67a63efc8a9c0db',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5fit_5f3_5f125ms',['VEML6046_IT_3_125MS',['../_adafruit___v_e_m_l6046_8h.html#a45f88541acc3c20740be1bf3fd70fbaea8bfefb762ec4cf6b7067b662835bd378',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5fit_5f400ms',['VEML6046_IT_400MS',['../_adafruit___v_e_m_l6046_8h.html#a45f88541acc3c20740be1bf3fd70fbaea0b62fe08f77a568bd89eb11ab7d74c51',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5fit_5f50ms',['VEML6046_IT_50MS',['../_adafruit___v_e_m_l6046_8h.html#a45f88541acc3c20740be1bf3fd70fbaea2b072573bdf0a7df30b06f03deed1686',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5fit_5f6_5f25ms',['VEML6046_IT_6_25MS',['../_adafruit___v_e_m_l6046_8h.html#a45f88541acc3c20740be1bf3fd70fbaea309945d028c6fc9197c469606486eff3',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5fpers_5f1',['VEML6046_PERS_1',['../_adafruit___v_e_m_l6046_8h.html#a3e5b8d5d42758e4fdec580ea211fbf1ca1e40bf6ce3ba0c7ba027b2326ec6377c',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5fpers_5f2',['VEML6046_PERS_2',['../_adafruit___v_e_m_l6046_8h.html#a3e5b8d5d42758e4fdec580ea211fbf1ca153ff2509aadbfda4f17a0544ac17ae0',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5fpers_5f4',['VEML6046_PERS_4',['../_adafruit___v_e_m_l6046_8h.html#a3e5b8d5d42758e4fdec580ea211fbf1cadd7224c28b18a787bf9d896544e57485',1,'Adafruit_VEML6046.h']]],
+  ['veml6046_5fpers_5f8',['VEML6046_PERS_8',['../_adafruit___v_e_m_l6046_8h.html#a3e5b8d5d42758e4fdec580ea211fbf1ca8dfb7102b71bfae1d9aa053fd047bb47',1,'Adafruit_VEML6046.h']]]
+];
