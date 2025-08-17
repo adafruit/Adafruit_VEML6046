@@ -20,31 +20,32 @@
 #ifndef _ADAFRUIT_VEML6046_H
 #define _ADAFRUIT_VEML6046_H
 
-#include "Arduino.h"
 #include <Adafruit_BusIO_Register.h>
 #include <Adafruit_I2CDevice.h>
+
+#include "Arduino.h"
 
 /*! Default I2C address for VEML6046 */
 #define VEML6046_DEFAULT_ADDR 0x29
 
 /*! VEML6046 register addresses */
-#define VEML6046_REG_RGB_CONF_0 0x00   ///< RGB configuration register 0
-#define VEML6046_REG_RGB_CONF_1 0x01   ///< RGB configuration register 1
-#define VEML6046_REG_G_THDH_L 0x04     ///< Green high threshold low byte
-#define VEML6046_REG_G_THDH_H 0x05     ///< Green high threshold high byte
-#define VEML6046_REG_G_THDL_L 0x06     ///< Green low threshold low byte
-#define VEML6046_REG_G_THDL_H 0x07     ///< Green low threshold high byte
-#define VEML6046_REG_R_DATA_L 0x10     ///< Red data low byte
-#define VEML6046_REG_R_DATA_H 0x11     ///< Red data high byte
-#define VEML6046_REG_G_DATA_L 0x12     ///< Green data low byte
-#define VEML6046_REG_G_DATA_H 0x13     ///< Green data high byte
-#define VEML6046_REG_B_DATA_L 0x14     ///< Blue data low byte
-#define VEML6046_REG_B_DATA_H 0x15     ///< Blue data high byte
-#define VEML6046_REG_IR_DATA_L 0x16    ///< IR data low byte
-#define VEML6046_REG_IR_DATA_H 0x17    ///< IR data high byte
-#define VEML6046_REG_ID_L 0x18         ///< Device ID low byte
-#define VEML6046_REG_ID_H 0x19         ///< Device ID high byte
-#define VEML6046_REG_INT_FLAG 0x1A     ///< Interrupt flag register
+#define VEML6046_REG_RGB_CONF_0 0x00 ///< RGB configuration register 0
+#define VEML6046_REG_RGB_CONF_1 0x01 ///< RGB configuration register 1
+#define VEML6046_REG_G_THDH_L 0x04   ///< Green high threshold low byte
+#define VEML6046_REG_G_THDH_H 0x05   ///< Green high threshold high byte
+#define VEML6046_REG_G_THDL_L 0x06   ///< Green low threshold low byte
+#define VEML6046_REG_G_THDL_H 0x07   ///< Green low threshold high byte
+#define VEML6046_REG_R_DATA_L 0x10   ///< Red data low byte
+#define VEML6046_REG_R_DATA_H 0x11   ///< Red data high byte
+#define VEML6046_REG_G_DATA_L 0x12   ///< Green data low byte
+#define VEML6046_REG_G_DATA_H 0x13   ///< Green data high byte
+#define VEML6046_REG_B_DATA_L 0x14   ///< Blue data low byte
+#define VEML6046_REG_B_DATA_H 0x15   ///< Blue data high byte
+#define VEML6046_REG_IR_DATA_L 0x16  ///< IR data low byte
+#define VEML6046_REG_IR_DATA_H 0x17  ///< IR data high byte
+#define VEML6046_REG_ID_L 0x18       ///< Device ID low byte
+#define VEML6046_REG_ID_H 0x19       ///< Device ID high byte
+#define VEML6046_REG_INT_FLAG 0x1A   ///< Interrupt flag register
 
 /*!
  * @brief Integration time settings for VEML6046
@@ -64,8 +65,8 @@ typedef enum {
  * @brief RGB gain settings for VEML6046
  */
 typedef enum {
-  VEML6046_GAIN_1X = 0x00,   ///< Gain x1 (default)
-  VEML6046_GAIN_2X = 0x01,   ///< Gain x2
+  VEML6046_GAIN_1X = 0x00,    ///< Gain x1 (default)
+  VEML6046_GAIN_2X = 0x01,    ///< Gain x2
   VEML6046_GAIN_0_66X = 0x02, ///< Gain x0.66
   VEML6046_GAIN_0_5X = 0x03   ///< Gain x0.5
 } veml6046_gain_t;
@@ -84,48 +85,48 @@ typedef enum {
  * @brief Main VEML6046 class for RGBIR color sensor
  */
 class Adafruit_VEML6046 {
-public:
+ public:
   Adafruit_VEML6046();
   ~Adafruit_VEML6046();
-  bool begin(uint8_t i2c_addr = VEML6046_DEFAULT_ADDR, TwoWire *wire = &Wire);
-  
+  bool begin(uint8_t i2c_addr = VEML6046_DEFAULT_ADDR, TwoWire* wire = &Wire);
+
   bool setIntegrationTime(veml6046_integration_time_t it);
   veml6046_integration_time_t getIntegrationTime(void);
-  
+
   bool setRGBModeForced(bool forced);
   bool getRGBModeForced(void);
-  
+
   bool RGBTrigger(void);
   bool isTriggered(void);
-  
+
   bool setGreenIntEnabled(bool enabled);
   bool getGreenIntEnabled(void);
-  
+
   bool enable(void);
   bool isEnabled(void);
-  
+
   bool setPhotoDiodeHalfSize(bool half_size);
   bool getPhotoDiodeHalfSize(void);
-  
+
   bool setRGBGain(veml6046_gain_t gain);
   veml6046_gain_t getRGBGain(void);
-  
+
   bool setIntPersistence(veml6046_persistence_t pers);
   veml6046_persistence_t getIntPersistence(void);
-  
+
   bool setRGBCalibration(bool enabled);
   bool getRGBCalibration(void);
-  
+
   bool setGreenThresholdHigh(uint16_t threshold);
   uint16_t getGreenThresholdHigh(void);
-  
+
   bool setGreenThresholdLow(uint16_t threshold);
   uint16_t getGreenThresholdLow(void);
-  
-  bool getData(uint16_t *r, uint16_t *g, uint16_t *b, uint16_t *ir);
 
-private:
-  Adafruit_I2CDevice *i2c_dev; ///< Pointer to I2C bus interface
+  bool getData(uint16_t* r, uint16_t* g, uint16_t* b, uint16_t* ir);
+
+ private:
+  Adafruit_I2CDevice* i2c_dev; ///< Pointer to I2C bus interface
 };
 
 #endif

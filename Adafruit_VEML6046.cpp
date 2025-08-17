@@ -31,7 +31,9 @@
 /*!
  *  @brief  Instantiates a new VEML6046 class
  */
-Adafruit_VEML6046::Adafruit_VEML6046() { i2c_dev = nullptr; }
+Adafruit_VEML6046::Adafruit_VEML6046() {
+  i2c_dev = nullptr;
+}
 
 /*!
  *  @brief  Cleans up the VEML6046
@@ -50,7 +52,7 @@ Adafruit_VEML6046::~Adafruit_VEML6046() {
  *          The Wire object to be used for I2C connections.
  *  @return True if initialization was successful, otherwise false.
  */
-bool Adafruit_VEML6046::begin(uint8_t i2c_addr, TwoWire *wire) {
+bool Adafruit_VEML6046::begin(uint8_t i2c_addr, TwoWire* wire) {
   if (i2c_dev) {
     delete i2c_dev;
   }
@@ -62,9 +64,10 @@ bool Adafruit_VEML6046::begin(uint8_t i2c_addr, TwoWire *wire) {
   }
 
   // Check device ID
-  Adafruit_BusIO_Register id_reg = Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_ID_L, 2, LSBFIRST);
+  Adafruit_BusIO_Register id_reg =
+      Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_ID_L, 2, LSBFIRST);
   uint16_t chip_id = id_reg.read();
-  
+
   if (chip_id != 0x0001) {
     return false;
   }
@@ -88,9 +91,11 @@ bool Adafruit_VEML6046::begin(uint8_t i2c_addr, TwoWire *wire) {
  *  @return True if successful, false if I2C write failed
  */
 bool Adafruit_VEML6046::setIntegrationTime(veml6046_integration_time_t it) {
-  Adafruit_BusIO_Register rgb_conf0_reg = Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_0, 1);
-  Adafruit_BusIO_RegisterBits rgb_it_bits = Adafruit_BusIO_RegisterBits(&rgb_conf0_reg, 3, 4);
-  
+  Adafruit_BusIO_Register rgb_conf0_reg =
+      Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_0, 1);
+  Adafruit_BusIO_RegisterBits rgb_it_bits =
+      Adafruit_BusIO_RegisterBits(&rgb_conf0_reg, 3, 4);
+
   return rgb_it_bits.write(it);
 }
 
@@ -99,9 +104,11 @@ bool Adafruit_VEML6046::setIntegrationTime(veml6046_integration_time_t it) {
  *  @return Current integration time setting
  */
 veml6046_integration_time_t Adafruit_VEML6046::getIntegrationTime(void) {
-  Adafruit_BusIO_Register rgb_conf0_reg = Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_0, 1);
-  Adafruit_BusIO_RegisterBits rgb_it_bits = Adafruit_BusIO_RegisterBits(&rgb_conf0_reg, 3, 4);
-  
+  Adafruit_BusIO_Register rgb_conf0_reg =
+      Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_0, 1);
+  Adafruit_BusIO_RegisterBits rgb_it_bits =
+      Adafruit_BusIO_RegisterBits(&rgb_conf0_reg, 3, 4);
+
   return (veml6046_integration_time_t)rgb_it_bits.read();
 }
 
@@ -111,9 +118,11 @@ veml6046_integration_time_t Adafruit_VEML6046::getIntegrationTime(void) {
  *  @return True if successful, false if I2C write failed
  */
 bool Adafruit_VEML6046::setRGBModeForced(bool forced) {
-  Adafruit_BusIO_Register rgb_conf0_reg = Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_0, 1);
-  Adafruit_BusIO_RegisterBits rgb_mode_bits = Adafruit_BusIO_RegisterBits(&rgb_conf0_reg, 1, 3);
-  
+  Adafruit_BusIO_Register rgb_conf0_reg =
+      Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_0, 1);
+  Adafruit_BusIO_RegisterBits rgb_mode_bits =
+      Adafruit_BusIO_RegisterBits(&rgb_conf0_reg, 1, 3);
+
   return rgb_mode_bits.write(forced ? 1 : 0);
 }
 
@@ -122,9 +131,11 @@ bool Adafruit_VEML6046::setRGBModeForced(bool forced) {
  *  @return True if in active force mode, false if in auto mode
  */
 bool Adafruit_VEML6046::getRGBModeForced(void) {
-  Adafruit_BusIO_Register rgb_conf0_reg = Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_0, 1);
-  Adafruit_BusIO_RegisterBits rgb_mode_bits = Adafruit_BusIO_RegisterBits(&rgb_conf0_reg, 1, 3);
-  
+  Adafruit_BusIO_Register rgb_conf0_reg =
+      Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_0, 1);
+  Adafruit_BusIO_RegisterBits rgb_mode_bits =
+      Adafruit_BusIO_RegisterBits(&rgb_conf0_reg, 1, 3);
+
   return rgb_mode_bits.read() == 1;
 }
 
@@ -133,9 +144,11 @@ bool Adafruit_VEML6046::getRGBModeForced(void) {
  *  @return True if successful, false if I2C write failed
  */
 bool Adafruit_VEML6046::RGBTrigger(void) {
-  Adafruit_BusIO_Register rgb_conf0_reg = Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_0, 1);
-  Adafruit_BusIO_RegisterBits rgb_trig_bits = Adafruit_BusIO_RegisterBits(&rgb_conf0_reg, 1, 2);
-  
+  Adafruit_BusIO_Register rgb_conf0_reg =
+      Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_0, 1);
+  Adafruit_BusIO_RegisterBits rgb_trig_bits =
+      Adafruit_BusIO_RegisterBits(&rgb_conf0_reg, 1, 2);
+
   return rgb_trig_bits.write(1);
 }
 
@@ -144,9 +157,11 @@ bool Adafruit_VEML6046::RGBTrigger(void) {
  *  @return True if measurement in progress, false if complete
  */
 bool Adafruit_VEML6046::isTriggered(void) {
-  Adafruit_BusIO_Register rgb_conf0_reg = Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_0, 1);
-  Adafruit_BusIO_RegisterBits rgb_trig_bits = Adafruit_BusIO_RegisterBits(&rgb_conf0_reg, 1, 2);
-  
+  Adafruit_BusIO_Register rgb_conf0_reg =
+      Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_0, 1);
+  Adafruit_BusIO_RegisterBits rgb_trig_bits =
+      Adafruit_BusIO_RegisterBits(&rgb_conf0_reg, 1, 2);
+
   return rgb_trig_bits.read() == 1;
 }
 
@@ -156,9 +171,11 @@ bool Adafruit_VEML6046::isTriggered(void) {
  *  @return True if successful, false if I2C write failed
  */
 bool Adafruit_VEML6046::setGreenIntEnabled(bool enabled) {
-  Adafruit_BusIO_Register rgb_conf0_reg = Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_0, 1);
-  Adafruit_BusIO_RegisterBits g_int_bits = Adafruit_BusIO_RegisterBits(&rgb_conf0_reg, 1, 1);
-  
+  Adafruit_BusIO_Register rgb_conf0_reg =
+      Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_0, 1);
+  Adafruit_BusIO_RegisterBits g_int_bits =
+      Adafruit_BusIO_RegisterBits(&rgb_conf0_reg, 1, 1);
+
   return g_int_bits.write(enabled ? 1 : 0);
 }
 
@@ -167,9 +184,11 @@ bool Adafruit_VEML6046::setGreenIntEnabled(bool enabled) {
  *  @return True if interrupt enabled, false if disabled
  */
 bool Adafruit_VEML6046::getGreenIntEnabled(void) {
-  Adafruit_BusIO_Register rgb_conf0_reg = Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_0, 1);
-  Adafruit_BusIO_RegisterBits g_int_bits = Adafruit_BusIO_RegisterBits(&rgb_conf0_reg, 1, 1);
-  
+  Adafruit_BusIO_Register rgb_conf0_reg =
+      Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_0, 1);
+  Adafruit_BusIO_RegisterBits g_int_bits =
+      Adafruit_BusIO_RegisterBits(&rgb_conf0_reg, 1, 1);
+
   return g_int_bits.read() == 1;
 }
 
@@ -178,9 +197,11 @@ bool Adafruit_VEML6046::getGreenIntEnabled(void) {
  *  @return True if successful, false if I2C write failed
  */
 bool Adafruit_VEML6046::enable(void) {
-  Adafruit_BusIO_Register rgb_conf_reg = Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_0, 2, MSBFIRST);
-  Adafruit_BusIO_RegisterBits rgb_on_bits = Adafruit_BusIO_RegisterBits(&rgb_conf_reg, 2, 7);
-  
+  Adafruit_BusIO_Register rgb_conf_reg =
+      Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_0, 2, MSBFIRST);
+  Adafruit_BusIO_RegisterBits rgb_on_bits =
+      Adafruit_BusIO_RegisterBits(&rgb_conf_reg, 2, 7);
+
   return rgb_on_bits.write(0x00);
 }
 
@@ -189,9 +210,11 @@ bool Adafruit_VEML6046::enable(void) {
  *  @return True if enabled, false if in shutdown
  */
 bool Adafruit_VEML6046::isEnabled(void) {
-  Adafruit_BusIO_Register rgb_conf_reg = Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_0, 2, MSBFIRST);
-  Adafruit_BusIO_RegisterBits rgb_on_bits = Adafruit_BusIO_RegisterBits(&rgb_conf_reg, 2, 7);
-  
+  Adafruit_BusIO_Register rgb_conf_reg =
+      Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_0, 2, MSBFIRST);
+  Adafruit_BusIO_RegisterBits rgb_on_bits =
+      Adafruit_BusIO_RegisterBits(&rgb_conf_reg, 2, 7);
+
   return rgb_on_bits.read() == 0x00;
 }
 
@@ -201,9 +224,11 @@ bool Adafruit_VEML6046::isEnabled(void) {
  *  @return True if successful, false if I2C write failed
  */
 bool Adafruit_VEML6046::setPhotoDiodeHalfSize(bool half_size) {
-  Adafruit_BusIO_Register rgb_conf1_reg = Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_1, 1);
-  Adafruit_BusIO_RegisterBits pddiv_bits = Adafruit_BusIO_RegisterBits(&rgb_conf1_reg, 1, 6);
-  
+  Adafruit_BusIO_Register rgb_conf1_reg =
+      Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_1, 1);
+  Adafruit_BusIO_RegisterBits pddiv_bits =
+      Adafruit_BusIO_RegisterBits(&rgb_conf1_reg, 1, 6);
+
   return pddiv_bits.write(half_size ? 1 : 0);
 }
 
@@ -212,9 +237,11 @@ bool Adafruit_VEML6046::setPhotoDiodeHalfSize(bool half_size) {
  *  @return True if 1/2 PD, false if 2/2 PD
  */
 bool Adafruit_VEML6046::getPhotoDiodeHalfSize(void) {
-  Adafruit_BusIO_Register rgb_conf1_reg = Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_1, 1);
-  Adafruit_BusIO_RegisterBits pddiv_bits = Adafruit_BusIO_RegisterBits(&rgb_conf1_reg, 1, 6);
-  
+  Adafruit_BusIO_Register rgb_conf1_reg =
+      Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_1, 1);
+  Adafruit_BusIO_RegisterBits pddiv_bits =
+      Adafruit_BusIO_RegisterBits(&rgb_conf1_reg, 1, 6);
+
   return pddiv_bits.read() == 1;
 }
 
@@ -224,9 +251,11 @@ bool Adafruit_VEML6046::getPhotoDiodeHalfSize(void) {
  *  @return True if successful, false if I2C write failed
  */
 bool Adafruit_VEML6046::setRGBGain(veml6046_gain_t gain) {
-  Adafruit_BusIO_Register rgb_conf1_reg = Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_1, 1);
-  Adafruit_BusIO_RegisterBits gain_bits = Adafruit_BusIO_RegisterBits(&rgb_conf1_reg, 2, 3);
-  
+  Adafruit_BusIO_Register rgb_conf1_reg =
+      Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_1, 1);
+  Adafruit_BusIO_RegisterBits gain_bits =
+      Adafruit_BusIO_RegisterBits(&rgb_conf1_reg, 2, 3);
+
   return gain_bits.write(gain);
 }
 
@@ -235,9 +264,11 @@ bool Adafruit_VEML6046::setRGBGain(veml6046_gain_t gain) {
  *  @return Current RGB gain setting
  */
 veml6046_gain_t Adafruit_VEML6046::getRGBGain(void) {
-  Adafruit_BusIO_Register rgb_conf1_reg = Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_1, 1);
-  Adafruit_BusIO_RegisterBits gain_bits = Adafruit_BusIO_RegisterBits(&rgb_conf1_reg, 2, 3);
-  
+  Adafruit_BusIO_Register rgb_conf1_reg =
+      Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_1, 1);
+  Adafruit_BusIO_RegisterBits gain_bits =
+      Adafruit_BusIO_RegisterBits(&rgb_conf1_reg, 2, 3);
+
   return (veml6046_gain_t)gain_bits.read();
 }
 
@@ -247,9 +278,11 @@ veml6046_gain_t Adafruit_VEML6046::getRGBGain(void) {
  *  @return True if successful, false if I2C write failed
  */
 bool Adafruit_VEML6046::setIntPersistence(veml6046_persistence_t pers) {
-  Adafruit_BusIO_Register rgb_conf1_reg = Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_1, 1);
-  Adafruit_BusIO_RegisterBits pers_bits = Adafruit_BusIO_RegisterBits(&rgb_conf1_reg, 2, 1);
-  
+  Adafruit_BusIO_Register rgb_conf1_reg =
+      Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_1, 1);
+  Adafruit_BusIO_RegisterBits pers_bits =
+      Adafruit_BusIO_RegisterBits(&rgb_conf1_reg, 2, 1);
+
   return pers_bits.write(pers);
 }
 
@@ -258,9 +291,11 @@ bool Adafruit_VEML6046::setIntPersistence(veml6046_persistence_t pers) {
  *  @return Current persistence setting
  */
 veml6046_persistence_t Adafruit_VEML6046::getIntPersistence(void) {
-  Adafruit_BusIO_Register rgb_conf1_reg = Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_1, 1);
-  Adafruit_BusIO_RegisterBits pers_bits = Adafruit_BusIO_RegisterBits(&rgb_conf1_reg, 2, 1);
-  
+  Adafruit_BusIO_Register rgb_conf1_reg =
+      Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_1, 1);
+  Adafruit_BusIO_RegisterBits pers_bits =
+      Adafruit_BusIO_RegisterBits(&rgb_conf1_reg, 2, 1);
+
   return (veml6046_persistence_t)pers_bits.read();
 }
 
@@ -270,9 +305,11 @@ veml6046_persistence_t Adafruit_VEML6046::getIntPersistence(void) {
  *  @return True if successful, false if I2C write failed
  */
 bool Adafruit_VEML6046::setRGBCalibration(bool enabled) {
-  Adafruit_BusIO_Register rgb_conf1_reg = Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_1, 1);
-  Adafruit_BusIO_RegisterBits cal_bits = Adafruit_BusIO_RegisterBits(&rgb_conf1_reg, 1, 0);
-  
+  Adafruit_BusIO_Register rgb_conf1_reg =
+      Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_1, 1);
+  Adafruit_BusIO_RegisterBits cal_bits =
+      Adafruit_BusIO_RegisterBits(&rgb_conf1_reg, 1, 0);
+
   return cal_bits.write(enabled ? 1 : 0);
 }
 
@@ -281,9 +318,11 @@ bool Adafruit_VEML6046::setRGBCalibration(bool enabled) {
  *  @return True if calibration enabled, false if disabled
  */
 bool Adafruit_VEML6046::getRGBCalibration(void) {
-  Adafruit_BusIO_Register rgb_conf1_reg = Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_1, 1);
-  Adafruit_BusIO_RegisterBits cal_bits = Adafruit_BusIO_RegisterBits(&rgb_conf1_reg, 1, 0);
-  
+  Adafruit_BusIO_Register rgb_conf1_reg =
+      Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_RGB_CONF_1, 1);
+  Adafruit_BusIO_RegisterBits cal_bits =
+      Adafruit_BusIO_RegisterBits(&rgb_conf1_reg, 1, 0);
+
   return cal_bits.read() == 1;
 }
 
@@ -293,8 +332,9 @@ bool Adafruit_VEML6046::getRGBCalibration(void) {
  *  @return True if successful, false if I2C write failed
  */
 bool Adafruit_VEML6046::setGreenThresholdHigh(uint16_t threshold) {
-  Adafruit_BusIO_Register thdh_reg = Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_G_THDH_L, 2, LSBFIRST);
-  
+  Adafruit_BusIO_Register thdh_reg =
+      Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_G_THDH_L, 2, LSBFIRST);
+
   return thdh_reg.write(threshold);
 }
 
@@ -303,8 +343,9 @@ bool Adafruit_VEML6046::setGreenThresholdHigh(uint16_t threshold) {
  *  @return Current high threshold value
  */
 uint16_t Adafruit_VEML6046::getGreenThresholdHigh(void) {
-  Adafruit_BusIO_Register thdh_reg = Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_G_THDH_L, 2, LSBFIRST);
-  
+  Adafruit_BusIO_Register thdh_reg =
+      Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_G_THDH_L, 2, LSBFIRST);
+
   return thdh_reg.read();
 }
 
@@ -314,8 +355,9 @@ uint16_t Adafruit_VEML6046::getGreenThresholdHigh(void) {
  *  @return True if successful, false if I2C write failed
  */
 bool Adafruit_VEML6046::setGreenThresholdLow(uint16_t threshold) {
-  Adafruit_BusIO_Register thdl_reg = Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_G_THDL_L, 2, LSBFIRST);
-  
+  Adafruit_BusIO_Register thdl_reg =
+      Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_G_THDL_L, 2, LSBFIRST);
+
   return thdl_reg.write(threshold);
 }
 
@@ -324,8 +366,9 @@ bool Adafruit_VEML6046::setGreenThresholdLow(uint16_t threshold) {
  *  @return Current low threshold value
  */
 uint16_t Adafruit_VEML6046::getGreenThresholdLow(void) {
-  Adafruit_BusIO_Register thdl_reg = Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_G_THDL_L, 2, LSBFIRST);
-  
+  Adafruit_BusIO_Register thdl_reg =
+      Adafruit_BusIO_Register(i2c_dev, VEML6046_REG_G_THDL_L, 2, LSBFIRST);
+
   return thdl_reg.read();
 }
 
@@ -337,21 +380,22 @@ uint16_t Adafruit_VEML6046::getGreenThresholdLow(void) {
  *  @param  ir Pointer to store IR channel data
  *  @return True if successful, false if I2C read failed
  */
-bool Adafruit_VEML6046::getData(uint16_t *r, uint16_t *g, uint16_t *b, uint16_t *ir) {
+bool Adafruit_VEML6046::getData(uint16_t* r, uint16_t* g, uint16_t* b,
+                                uint16_t* ir) {
   if (!r || !g || !b || !ir) {
     return false;
   }
-  
+
   uint8_t buffer[8];
   uint8_t reg_addr = VEML6046_REG_R_DATA_L;
   if (!i2c_dev->write_then_read(&reg_addr, 1, buffer, 8)) {
     return false;
   }
-  
+
   *r = buffer[0] | (buffer[1] << 8);
   *g = buffer[2] | (buffer[3] << 8);
   *b = buffer[4] | (buffer[5] << 8);
   *ir = buffer[6] | (buffer[7] << 8);
-  
+
   return true;
 }
